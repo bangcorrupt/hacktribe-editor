@@ -1,0 +1,3 @@
+[submodule "hacktribe"]
+	path = hacktribe
+	url = ../hacktribe
