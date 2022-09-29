@@ -46,15 +46,7 @@ def main():
 
     #fxe.midi.run_live()
     
-    #sleep(10)
-    
-    #fxe.midi.run = False
-    
     input('Press ENTER to exit') 
-
-    # keepalive
-    #while True:
-    #    sleep(100)
 
 class E2FXEditor:
     
@@ -64,9 +56,6 @@ class E2FXEditor:
         logging.debug('Initialise FX Editor')
         self.midi = midi
         self.sysex = sysex
-
-        #msg = mido.Message('note_on', note=64)
-        #self.midi.outport.send(msg)
         
         if preset is not None:
             logging.debug('Parse initial preset')
@@ -75,7 +64,6 @@ class E2FXEditor:
             logging.debug('Parse default preset')
             self.preset = fmt.fx_preset.parse(fmt.fx_preset.build({}))
         
-
 
     def get_preset(self, idx, mfx=False):
         if mfx == False:
