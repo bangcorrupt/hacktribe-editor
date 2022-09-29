@@ -12,7 +12,7 @@ def main():
 
 class FirmwarePatcher:
     def __init__(self):
-        self.root_path = Path('../')
+        self.root_path = Path('./hacktribe')
         self.src_path = self.root_path / 'SYSTEM.VSB'
         self.patch_path = self.root_path / 'patch/hacktribe-2.patch'
         self.dest_path = self.root_path
