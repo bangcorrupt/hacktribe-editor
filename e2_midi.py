@@ -26,21 +26,21 @@ class E2Midi:
                     0x4c:[NRPN_MSB_FX_EDIT, 0, 6], 
                     0x4d:[NRPN_MSB_FX_EDIT, 0, 7], 
                     0x4e:[NRPN_MSB_FX_EDIT, 0, 8], 
-                    0x4f:[NRPN_MSB_FX_EDIT, 0, 0],
-                    0x50:[NRPN_MSB_FX_EDIT, 0, 1], 
-                    0x51:[NRPN_MSB_FX_EDIT, 0, 2], 
-                    0x52:[NRPN_MSB_FX_EDIT, 0, 3], 
-                    0x53:[NRPN_MSB_FX_EDIT, 0, 4], 
-                    0x54:[NRPN_MSB_FX_EDIT, 0, 5], 
-                    0x55:[NRPN_MSB_FX_EDIT, 0, 6], 
-                    0x56:[NRPN_MSB_FX_EDIT, 0, 7], 
-                    0x57:[NRPN_MSB_FX_EDIT, 0, 8], 
-                    0x58:[NRPN_MSB_FX_EDIT, 0, 8], 
-                    0x59:[NRPN_MSB_FX_EDIT, 0, 8], 
-                    0x5a:[NRPN_MSB_FX_EDIT, 0, 8], 
-                    0x5b:[NRPN_MSB_FX_EDIT, 0, 8], 
-                    0x5c:[NRPN_MSB_FX_EDIT, 0, 8], 
-                    0x5d:[NRPN_MSB_FX_EDIT, 0, 8], 
+                    0x4f:[NRPN_MSB_FX_EDIT, 0, 9],
+                    0x50:[NRPN_MSB_FX_EDIT, 0, 10], 
+                    0x51:[NRPN_MSB_FX_EDIT, 0, 11], 
+                    0x52:[NRPN_MSB_FX_EDIT, 0, 12], 
+                    0x53:[NRPN_MSB_FX_EDIT, 0, 13], 
+                    0x54:[NRPN_MSB_FX_EDIT, 0, 14], 
+                    0x55:[NRPN_MSB_FX_EDIT, 0, 15], 
+                    0x56:[NRPN_MSB_FX_EDIT, 0, 16], 
+                    0x57:[NRPN_MSB_FX_EDIT, 0, 17], 
+                    0x58:[NRPN_MSB_FX_EDIT, 0, 18], 
+                    0x59:[NRPN_MSB_FX_EDIT, 0, 19], 
+                    0x5a:[NRPN_MSB_FX_EDIT, 0, 20], 
+                    0x5b:[NRPN_MSB_FX_EDIT, 0, 21], 
+                    0x5c:[NRPN_MSB_FX_EDIT, 0, 22], 
+                    0x5d:[NRPN_MSB_FX_EDIT, 0, 23], 
                     }
 
 
@@ -61,18 +61,11 @@ class E2Midi:
             self.inport.callback = input_handler
         else:
             self.inport.callback=self.input_handler
-        
-        self.input_channel = 4
-        self.output_channel = 1
+
         
         self.nrpn_cc_map = E2Midi.nrpn_cc_map
         self.fx_chain_idx = 0
-        #self.nrpn_msb = 0
-        #self.nrpn_lsb = 0
-        #self.data_msb = 0
-        #self.data_lsb = 0
 
-    
     
     def input_handler(self, msg):
         logging.debug('Called input_handler')
@@ -119,20 +112,15 @@ class E2Midi:
         nrpn = [nrpn_msb, nrpn_lsb, data_msb, data_lsb]
         
         self.send_nrpn(nrpn)
-        
         return
     
     # nrpn is list of nrpn values [nprn-msb, nrpn-lsb, data-msb, data,-lsb]
     def send_nrpn(self, nrpn):
         print('type(nrpn) = ' + str(type(nrpn)))
         msgs =  []
-        #if nrpn[0] != self.nrpn_msb:
         msgs.append(mido.Message('control_change', control=0x63, value=nrpn[0]))
-        #if nrpn[1] != self.nrpn_lsb:
         msgs.append(mido.Message('control_change', control=0x62, value=nrpn[1]))
-        #if nrpn[2] != self.data_msb:
         msgs.append(mido.Message('control_change', control=0x06, value=nrpn[2]))
-        #if nrpn[3] != self.data_lsb:
         msgs.append(mido.Message('control_change', control=0x26, value=nrpn[3]))
 
         for msg in msgs:

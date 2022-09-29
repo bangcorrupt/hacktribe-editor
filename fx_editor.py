@@ -30,7 +30,7 @@ def main():
   
     m = E2Midi(inport=mido.open_input('MPK mini 3:MPK mini 3 MIDI 1'))
     e = E2Sysex()
-    fxe = E2FXEditor(m, e)
+    fxe = FXEditor(m, e)
 
     #m.inport.callback = midi_input_handler
 
@@ -48,7 +48,7 @@ def main():
     
     input('Press ENTER to exit') 
 
-class E2FXEditor:
+class FXEditor:
     
     # sysex is E2Sysex() instace
     # preset is fx preset as bytes
