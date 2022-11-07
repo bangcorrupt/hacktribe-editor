@@ -18,17 +18,18 @@ def main():
 
 
 class E2Sysex:
-    def __init__(self, midi=None):
+    def __init__(self, port='electribe2 sampler electribe2 s', midi=None):
         logging.debug('Initialise SysEx')
-        self.midi = midi
-        if self.midi is not None:
-
+        
+        if midi is not None:
+            self.midi = midi
             self.inport = self.midi.inport
             self.outport = self.midi.outport
-
         else:
-            self.inport = mido.open_input('electribe2 sampler electribe2 s')
-            self.outport = mido.open_output('electribe2 sampler electribe2 s')
+            #port = 'electribe2:electribe2 electribe2 _ SOUND'
+            self.inport = mido.open_input(port)
+            self.outport = mido.open_output(port)
+
 
         self.global_channel, self.id, self.version = self.search_device()
    
