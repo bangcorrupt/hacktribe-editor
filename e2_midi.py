@@ -82,6 +82,7 @@ class E2Midi:
             if msg.control in self.nrpn_cc_map:
                 self.map_cc_nrpn(msg)           # map cc to nrpn
             else:
+                self.outport.send(msg)
                 pass                            # ADD - cc remap
 
 

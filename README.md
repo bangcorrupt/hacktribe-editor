@@ -10,10 +10,13 @@ An editor app for hacktribe
 
 To test:
 
-Clone hacktribe-editor:
+Clone Hacktribe Editor including submodules:
 
-    git clone https://github.com/bangcorrupt/hacktribe-editor.git
- 
+    git clone --recursive https://github.com/bangcorrupt/hacktribe-editor.git
+
+Enter `hacktribe-editor` directory:
+
+    cd hacktribe-editor
 
 Install dependencies:
 
