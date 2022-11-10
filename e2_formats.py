@@ -813,3 +813,4 @@ fx_preset = Struct(Seek(0x01),
                     'ifx_2_params' / ifx_2_params, Seek(0x1be), 
                     'mfx_device' / mfx_device, Seek(0x1c9),
                     'mfx_params' / mfx_params, Seek(0x209), Padding(3),
+                    )

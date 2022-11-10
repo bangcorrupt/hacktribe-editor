@@ -1,8 +1,4 @@
 from firmware_patcher import FirmwarePatcher
-from fx_editor import FXEditor
-
-from e2sysex import *
-from e2_midi import *
 
 import e2_formats as fmt
 
@@ -20,9 +16,6 @@ class HacktribeAppBackend:
         logging.debug('Initialising Backend')
 
         self.fw_patcher = FirmwarePatcher()
-        self.midi = E2Midi()
-        self.sysex = E2Sysex()
-        self.fx_editor = FXEditor()
 
     def welcome_msg(self):
         logging.debug('Display welcome message')
