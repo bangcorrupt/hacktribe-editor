@@ -90,7 +90,7 @@ Show the FX settings for channel 0:
     show fx -c 0
 
 
-This should print some yaml to the console
+This should print some yaml to the console.
 
 <br/>
 
