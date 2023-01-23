@@ -85,10 +85,14 @@ class HtMIDI:
         self.inport.callback = self.input_callback
 
         self.input_callbacks = []
-        if callback is not None: self.register_callback(callback)
+        if callback is not None:
+            self.register_callback(callback)
 
-        self.control_ports = []
-        if control_port is not None: self.add_control_port(control_port)
+        self.control_ports = [
+            mido.open_input(name='HACKTRIBE_EDITOR_CONTROL', virtual=True)
+        ]
+        if control_port is not None:
+            self.add_control_port(control_port)
 
         self.control_callbacks = []
         for port in self.control_ports:
