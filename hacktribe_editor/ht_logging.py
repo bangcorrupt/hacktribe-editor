@@ -18,7 +18,9 @@ console_log.setLevel(ht_log_level)
 console_log.setFormatter(formatter)
 log.addHandler(console_log)
 
-file_log = RotatingFileHandler('ht_editor.log', maxBytes=4069, backupCount=8)
+file_log = RotatingFileHandler('ht_editor.log',
+                               maxBytes=1073741824,
+                               backupCount=2)
 file_log.setLevel(logging.DEBUG)
 file_log.setFormatter(formatter)
 log.addHandler(file_log)
