@@ -26,6 +26,7 @@ def get_ports(filt=None, output=False):
 
 @log_debug
 def prompt_ports(filt=None, output=False):
+    log.info("Called prompt ports.")
     if output:
         prefix = "\nAvailable output ports:\n"
         ports = get_output_names()
