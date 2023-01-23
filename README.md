@@ -63,7 +63,7 @@ Solo button will select MFX (channel 16).
 
 Bank Right button will decrement FX control map index (0..10), Bank Left button will increment.
 
-Fader 8 will set FX control map maximum value, fader 9 will set minimum value.
+Fader 8 will set FX control map minimum value, fader 9 will set maximum value.
 
 
 Show the FX settings for channel 0:
