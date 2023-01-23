@@ -1,0 +1,12 @@
+name: Hacktribe
+path: ./ht_data
+midi:
+  input: electribe2 sampler:electribe2 sampler electribe2 s
+  output: electribe2 sampler:electribe2 sampler electribe2 s
+  control:
+    input:
+    - MIDI Mix:MIDI Mix MIDI 1
+    - MPK mini 3:MPK mini 3 MIDI 1
+    map: ./midi_map.py
+log:
+  level: error
