@@ -13,38 +13,26 @@ Clone the repo and enter directory:
     git clone --recursive -b ht-cli https://bangcorrupt/hacktribe-editor
     cd hacktribe-editor
 
-<<<<<<< HEAD
 <br/>
-=======
->>>>>>> 5f0782f (readme)
 
 Create and activate virtual environment:
 
     python3 -m venv venv
     source venv/bin/activate
 
-<<<<<<< HEAD
 <br/>
-=======
->>>>>>> 5f0782f (readme)
 
 Install:
 
     pip install .
 
-<<<<<<< HEAD
 <br/>
-=======
->>>>>>> 5f0782f (readme)
 
 Run:
 
     ht-cli
 
-<<<<<<< HEAD
 <br/>
-=======
->>>>>>> 5f0782f (readme)
 
 Enter an interactive prompt:
 
@@ -78,12 +66,8 @@ Configure a MIDI control input (optional):
 
     config midi -c
 
-<<<<<<< HEAD
 You should get a prompt with a list of available MIDI ports.  Choose one that isn't Hacktribe.
-=======
 
-You should get a prompt with a list of available MIDI ports.  Choose one that isn't Hacltribe.
->>>>>>> 5f0782f (readme)
 
 If you have an Akai MIDImix, load it with `midimix-preset.midimix`.  
 
@@ -121,12 +105,8 @@ Edit an FX preset file:
 
     edit fx -f my-preset.ifx
 
-<<<<<<< HEAD
 This should open the file in yaml format in your default text editor.
-=======
 
-This should the file in yaml format in your default text editor.
->>>>>>> 5f0782f (readme)
 
 Edit the `name` field to something more interesting and save the file.
 
@@ -147,12 +127,8 @@ Setting an existing FX preset is a little quicker:
 
     set fx -m 31 -f ht_data/fx/wet-plate-reverb.mfx
 
-<<<<<<< HEAD
-You should see the Autopan MFX has been replaced with new plate reverb.
-=======
+You should see the Autopan MFX has been replaced with a new plate reverb.
 
-You should see the 'Punch' IFX has been replaced with your awesome new preset.
->>>>>>> 5f0782f (readme)
 
 <br/>
 
@@ -162,10 +138,7 @@ This tool only acts on the CPU RAM, so if everything goes wrong reboot Hacktribe
 
 More documentation comming soon.
 
-<<<<<<< HEAD
 <br/>
-=======
->>>>>>> 5f0782f (readme)
 
 ### Issues
 
@@ -173,10 +146,6 @@ Many features not implemented yet.
 
 For stereo samples select second channel of pair.
 
-<<<<<<< HEAD
 Please use the Hacktribe Editor discussion forum before opening a new issue.
 
 If it crashes, please include `ht_editor.log` as an attachement (please don't paste the contents, there is a lot of it).
-=======
-Please use the Hacktribe Editor discussion forum before opening an issue.
->>>>>>> 5f0782f (readme)
