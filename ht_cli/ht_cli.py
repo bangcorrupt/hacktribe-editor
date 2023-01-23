@@ -16,14 +16,13 @@ from hacktribe_editor.ht_editor import HacktribeEditor
 from hacktribe_editor.ht_control import HtControl
 from ht_cli.ht_fx_commands import get_fx, set_fx, add_fx, show_fx, edit_fx
 from ht_cli.ht_cli_cfg_commands import config_midi, config_path
+from ht_cli.ht_cli_utils import pass_hted
 
 # Reduce log spam
 logging.getLogger('asyncio').setLevel(logging.ERROR)
 
 log = logging.getLogger(__name__)
 log.info('Starting ht_cli.')
-
-pass_hted = click.make_pass_decorator(HacktribeEditor, ensure=True)
 
 # ht_cli -----------------------------------
 
@@ -76,7 +75,7 @@ CONTEXT_SETTINGS = dict(
 )
 @pass_hted
 @log_debug
-def cli(hted, log_level=None):
+def cli(hted=None, log_level=None):
     ''' Command line interface for Hacktribe Editor. '''
     log.info("Called cli.")
 

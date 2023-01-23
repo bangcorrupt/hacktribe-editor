@@ -13,6 +13,7 @@ pass_hted = click.make_pass_decorator(HacktribeEditor, ensure=True)
 
 @log_debug
 def get_ports(filt=None, output=False):
+    log.info("Called get_ports.")
     if output:
         ports = get_output_names()
     else:
@@ -49,7 +50,7 @@ def prompt_ports(filt=None, output=False):
 
 @log_debug
 def test_port(port, output=False):
-
+    log.info("Called test_port.")
     if output:
         try:
             open_input(port)
@@ -66,3 +67,11 @@ def test_port(port, output=False):
         except:
             log.warning("MIDI input port '%s' is not working", port)
             return False
+
+
+def main():
+    pass
+
+
+if __name__ == '__main__':
+    main()

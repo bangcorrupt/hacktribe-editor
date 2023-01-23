@@ -5,7 +5,7 @@ import cloup
 from cloup import option, option_group
 from cloup.constraints import mutually_exclusive, require_one, require_any
 
-from ht_cli.ht_cli_utils import pass_hted, prompt_ports, test_port
+from ht_cli.ht_cli_utils import pass_hted, test_port, prompt_ports
 from hacktribe_editor.ht_logging import log_debug
 import hacktribe_editor.ht_logging
 
