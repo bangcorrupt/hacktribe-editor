@@ -8,7 +8,7 @@ Early support for FX editing.
 
 Clone the repo and enter directory:
     
-    git clone --recursive -b fx-edit https://bangcorrupt/hacktribe-editor
+    git clone --recursive -b ht-cli https://bangcorrupt/hacktribe-editor
     cd hacktribe-editor
 
 Create and activate virtual environment:
