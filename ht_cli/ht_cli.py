@@ -109,6 +109,8 @@ def ht_repl(hted):
     }
 
     print_banner()
+    # Initialise MIDI control
+    HtControl(hted)
     repl(click.get_current_context(), prompt_kwargs=prompt_kwargs)
 
 
