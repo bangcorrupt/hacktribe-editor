@@ -7,7 +7,6 @@ from hacktribe_editor import ht_fx_preset_format as fxp_fmt
 from hacktribe_editor import ht_fx_edit_utils as fxed_utils
 from hacktribe_editor import ht_sysex_utils as sysx_utils
 from hacktribe_editor.ht_edit import HtEdit
-from hacktribe_editor.ht_fx_editor import HtFXEditor
 from hacktribe_editor.ht_format import HtMFXEditBuffer, HtFXPreset
 from hacktribe_editor.ht_logging import log_debug
 

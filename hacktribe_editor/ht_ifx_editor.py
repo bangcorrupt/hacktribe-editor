@@ -10,7 +10,6 @@ from hacktribe_editor import ht_fx_edit_utils as fxed_utils
 from hacktribe_editor import ht_sysex_utils as sysx_utils
 
 from hacktribe_editor.ht_edit import HtEdit
-from hacktribe_editor.ht_fx_editor import HtFXEditor
 from hacktribe_editor.ht_format import HtIFXEditBuffer, HtFXPreset
 
 
