@@ -140,3 +140,5 @@ Many features not implemented yet.
 For stereo samples select second channel of pair.
 
 Please use the Hacktribe Editor discussion forum before opening a new issue.
+
+If it crashes, please include `ht_editor.log` as an attachement (please don't paste the contents, there is a lot of it).
