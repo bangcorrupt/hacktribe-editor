@@ -49,7 +49,7 @@ Configure a MIDI control input (optional):
 
     config midi -c
 
-You should get a prompt with a list of available MIDI ports.  Choose one that isn't Hacltribe.
+You should get a prompt with a list of available MIDI ports.  Choose one that isn't Hacktribe.
 
 If you have an Akai MIDImix, load it with `midimix-preset.midimix`.  
 
@@ -82,7 +82,7 @@ Edit an FX preset file:
 
     edit fx -f my-preset.ifx
 
-This should the file in yaml format in your default text editor.
+This should open the file in yaml format in your default text editor.
 
 Edit the `name` field to something more interesting and save the file.
 
@@ -93,14 +93,14 @@ Add a new IFX preset to Hacktribe:
 
 The screen will start flashing 'Working' like crazy.  
 
-After a while it will stop and you should see your new IFX preset at the top of he list.
+After a while it will stop and you should see your new IFX preset at the top of the list.
 
 
 Setting an existing FX preset is a little quicker:
 
     set fx -m 31 -f ht_data/fx/wet-plate-reverb.mfx
 
-You should see the 'Punch' IFX has been replaced with your awesome new preset.
+You should see the Autopan MFX has been replaced with new plate reverb.
 
 
 Read through the help in the cli and try stuff out.  Have a look in `ht_data/fx` for some presets.
@@ -109,10 +109,10 @@ This tool only acts on the CPU RAM, so if everything goes wrong reboot Hacktribe
 
 More documentation comming soon.
 
-### Known issues
+### Issues
 
 Many features not implemented yet.
 
 For stereo samples select second channel of pair.
 
-
+Please use the Hacktribe Editor discussion forum before opening a new issue.
