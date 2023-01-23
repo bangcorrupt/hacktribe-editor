@@ -4,6 +4,8 @@
 
 Early support for FX editing.
 
+<br/>
+
 ### Testing
 
 Clone the repo and enter directory:
@@ -11,28 +13,38 @@ Clone the repo and enter directory:
     git clone --recursive -b ht-cli https://bangcorrupt/hacktribe-editor
     cd hacktribe-editor
 
+<br/>
+
 Create and activate virtual environment:
 
     python3 -m venv venv
     source venv/bin/activate
 
+<br/>
+
 Install:
 
     pip install .
+
+<br/>
 
 Run:
 
     ht-cli
 
+<br/>
+
 Enter an interactive prompt:
 
     ht-cli repl
 
+<br/>
 
 Show some help:
 
     --help
 
+<br/>
 
 Configure Hacktribe MIDI input:
 
@@ -40,10 +52,13 @@ Configure Hacktribe MIDI input:
 
 You should get a prompt with a list of available electribe MIDI ports.
 
+<br/>
+
 Likewise for Hacktribe MIDI output:
 
     config midi -o
 
+<br/>
 
 Configure a MIDI control input (optional):
 
@@ -65,6 +80,7 @@ Bank Right button will decrement FX control map index (0..10), Bank Left button 
 
 Fader 8 will set FX control map minimum value, fader 9 will set maximum value.
 
+<br/>
 
 Show the FX settings for channel 0:
 
@@ -72,11 +88,14 @@ Show the FX settings for channel 0:
 
 This should print some yaml to the console
 
+<br/>
+
 
 Get the current settings of channel 0 FX as a preset file:
 
     get fx -c 0 -f my-preset.ifx
 
+<br/>
 
 Edit an FX preset file:
 
@@ -86,6 +105,7 @@ This should open the file in yaml format in your default text editor.
 
 Edit the `name` field to something more interesting and save the file.
 
+<br/>
 
 Add a new IFX preset to Hacktribe:
 
@@ -95,6 +115,7 @@ The screen will start flashing 'Working' like crazy.
 
 After a while it will stop and you should see your new IFX preset at the top of the list.
 
+<br/>
 
 Setting an existing FX preset is a little quicker:
 
@@ -102,12 +123,15 @@ Setting an existing FX preset is a little quicker:
 
 You should see the Autopan MFX has been replaced with new plate reverb.
 
+<br/>
 
 Read through the help in the cli and try stuff out.  Have a look in `ht_data/fx` for some presets.
 
 This tool only acts on the CPU RAM, so if everything goes wrong reboot Hacktribe.
 
 More documentation comming soon.
+
+<br/>
 
 ### Issues
 
