@@ -28,23 +28,74 @@ Install:
 
 <br/>
 
-Run:
+Run `ht-cli` with no options to enter an interactive prompt:
 
     ht-cli
 
+You should see:
+
+    ________________________________________
+    _  _ ____ ____ _  _ ___ ____ _ ___  ____ 
+    |__| |__| |    |_/   |  |__/ | |__] |___ 
+    |  | |  | |___ | \_  |  |  \ | |__] |___ 
+                                             
+    https://github.com/bangcorrupt/hacktribe
+    ________________________________________
+
+
+         Welcome to Hacktribe Editor.
+
+      Run 'help' to see available options.
+
+     Run 'control' to initialise Hacktribe.
+
+
 <br/>
 
-Enter an interactive prompt:
 
-    ht-cli repl
+Run `help` to show some help:
+
+    help
+
+
+You should see something like:
+
+
+    Usage: ht-cli  help [OPTIONS] COMMAND [ARGS]...
+
+      Command line interface for Hacktribe Editor.
+
+    Options:
+      -l, --log [d|debug|i|info|w|warning|e|error|c|critical]
+                  Log level.
+      -h, --help  Show this message and exit.
+
+    Commands:
+      about (ab)                   All about Hacktribe Editor.
+      config (c, cfg, conf)        Configure Hacktribe Editor.
+      control (r, run, ctl, ctrl)  Control Hacktribe Editor.
+      fx (f, efx, effects)         FX commands.
+      help (h, ?)                  Show help message for [command].
 
 <br/>
 
-Show some help:
 
-    --help
+In the prompt, we can hit tab and space to auto-complete commands.
+
+There isn't a lot of console feedback yet, 
+
+so set the log level to `INFO` to see what's happening:
+
+
+    config debug --log info
+
+You should see a log message for most function calls.
+
+If it's too much information, set the log level to `ERROR`. 
+
 
 <br/>
+
 
 Configure Hacktribe MIDI input:
 
@@ -66,28 +117,25 @@ Configure a MIDI control input (optional):
 
     config midi -c
 
-You should get a prompt with a list of available MIDI ports.  Choose one that isn't Hacktribe.
+You should get a prompt with a list of available MIDI ports, choose one that isn't Hacktribe.
+
+See MIDI.md for more information on MIDI mapping.  
 
 
-If you have an Akai MIDImix, load it with `midimix-preset.midimix`.  
+<br/>
 
-If not, adjust the values in `hacktribe_editor/midi_map.py` to suit your controller.
+Run `control` to initalise MIDI communication with Hacktribe.
 
-Assuming a MIDImix, pots will control FX parameters 0..23, top to bottom, left to right.
+The log output should include the line:
 
-Mute buttons will select channels 0..7, Rec Arm buttons will select channels 8..15.
+    INFO    [ht_editor.py:ht_editor:init_midi:130] MIDI initialisation succeeded.
 
-Solo button will select MFX (channel 16).
-
-Bank Right button will decrement FX control map index (0..10), Bank Left button will increment.
-
-Fader 8 will set FX control map minimum value, fader 9 will set maximum value.
 
 <br/>
 
 Show the FX settings for channel 0:
 
-    show fx -c 0
+    fx show -c 0
 
 
 This should print some yaml to the console.
@@ -97,13 +145,13 @@ This should print some yaml to the console.
 
 Get the current settings of channel 0 FX as a preset file:
 
-    get fx -c 0 -f my-preset.ifx
+    fx get -c 0 -f my-preset.ifx
 
 <br/>
 
 Edit an FX preset file:
 
-    edit fx -f my-preset.ifx
+    fx edit -f my-preset.ifx
 
 This should open the file in yaml format in your default text editor.
 
@@ -114,10 +162,10 @@ Edit the `name` field to something more interesting and save the file.
 
 Add a new IFX preset to Hacktribe:
 
-    add fx -f my-preset.ifx
+    fx add -f my-preset.ifx
 
 
-The screen will start flashing 'Working' like crazy.  
+The Hacktribe screen will start flashing 'Working' like crazy.  
 
 After a while it will stop and you should see your new IFX preset at the top of the list.
 
@@ -125,7 +173,7 @@ After a while it will stop and you should see your new IFX preset at the top of 
 
 Setting an existing FX preset is a little quicker:
 
-    set fx -m 31 -f ht_data/fx/wet-plate-reverb.mfx
+    fx set -m 31 -f ht_data/fx/wet-plate-reverb.mfx
 
 You should see the Autopan MFX has been replaced with a new plate reverb.
 
@@ -136,7 +184,7 @@ Read through the help in the cli and try stuff out.  Have a look in `ht_data/fx`
 
 This tool only acts on the CPU RAM, so if everything goes wrong reboot Hacktribe.
 
-More documentation comming soon.
+More documentation coming soon.
 
 <br/>
 

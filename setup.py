@@ -10,7 +10,7 @@ setup(
         'mido',
         'construct @ https://github.com/construct/construct/archive/master.zip',
         'cloup',
-        'click-repl',
+        'click-repl @ https://github.com/bangcorrupt/click-repl/archive/master.zip',
         'click-spinner',
         'pyfiglet',
         'pyyaml',

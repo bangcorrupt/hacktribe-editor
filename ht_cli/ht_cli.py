@@ -43,12 +43,14 @@ CONTEXT_SETTINGS = dict(
     formatter_settings=HelpFormatter.settings(theme=help_theme),
 )
 
+in_repl = False
+
 
 @cloup.group(
     context_settings=CONTEXT_SETTINGS,
     show_subcommand_aliases=True,
     invoke_without_command=True,
-    no_args_is_help=True,
+    name='cli',
 )
 @cloup.option(
     '-l',
@@ -74,8 +76,9 @@ CONTEXT_SETTINGS = dict(
     help="Log level.",
 )
 @pass_hted
+@click.pass_context
 @log_debug
-def cli(hted=None, log_level=None):
+def cli(ctx, hted=None, log_level=None):
     ''' Command line interface for Hacktribe Editor. '''
     log.info("Called cli.")
 
@@ -94,23 +97,29 @@ def cli(hted=None, log_level=None):
     else:
         ht_logging.set_log_level(hted.config['log']['level'])
 
+    if ctx.invoked_subcommand is None:
+        print_banner()
+        # Initialise MIDI control
+        # HtControl(hted)
+        global in_repl
+        in_repl = True
 
-@cli.command(
-    name='repl',
-    aliases=['re', 'rep'],
-    help="Enter an interactive prompt.",
-)
-@pass_hted
-@log_debug
-def ht_repl(hted):
-    prompt_kwargs = {
-        'history': FileHistory(Path('./ht-cli.history')),
-    }
+        leave = False
+        while not leave:
+            leave = True
+            prompt_kwargs = {
+                'history': FileHistory(Path('./ht-cli.history')),
+                'message': '[ ht ] '
+            }
+            try:
+                repl(
+                    ctx,
+                    prompt_kwargs=prompt_kwargs,
+                )
+            except:
+                log.error("Exception.")
 
-    print_banner()
-    # Initialise MIDI control
-    HtControl(hted)
-    repl(click.get_current_context(), prompt_kwargs=prompt_kwargs)
+            leave = click.confirm('Exit ht-cli?', default=True)
 
 
 # ht_cli about ------------------------------
@@ -215,126 +224,95 @@ def control(hted):
     HtControl(hted)
 
 
-# ht_cli get -----------------------------
-
-
-@cli.group(
-    name='get',
-    aliases=['g', 'ge'],
+@cloup.group(
+    name='fx',
+    aliases=['f', 'efx', 'effects'],
     show_subcommand_aliases=True,
-    no_args_is_help=True,
+    invoke_without_command=True,
 )
 @pass_hted
+@click.pass_context
 @log_debug
-def get_group(hted):
-    ''' Get something. '''
-    log.info("called cli.get_group")
+def fx_group(ctx, hted):
+    ''' FX commands.'''
+    log.info("called cli.fx_group")
+
+    prompt_kwargs = {
+        'history': FileHistory(Path('./ht-cli.history')),
+        'message': '[ ht.fx ] '
+    }
+    if ctx.invoked_subcommand is None:
+        if in_repl:
+            # Initialise MIDI control
+            # HtControl(hted)
+
+            repl(
+                ctx,
+                prompt_kwargs=prompt_kwargs,
+                allow_nested_groups=True,
+            )
+
+        else:
+            print_help(ctx.command)
 
 
-get_group.add_command(get_fx)
+fx_group.add_command(add_fx, name='add')
+fx_group.add_command(set_fx, name='set')
+fx_group.add_command(get_fx, name='get')
+fx_group.add_command(show_fx, name='show')
+fx_group.add_command(edit_fx, name='edit')
+fx_group.add_command(config_group)
 
-# ht_cli set -----------------------------
+cli.add_command(fx_group)
 
 
-@cli.group(
-    name='set',
-    aliases=['s', 'se'],
-    show_subcommand_aliases=True,
-    no_args_is_help=True,
+@cloup.command(
+    name='help',
+    aliases=['h', '?'],
+    help="Show help message for [command].",
 )
 @pass_hted
+@click.pass_context
+@cloup.argument('cmd', required=False, help="Optional command name.")
 @log_debug
-def set_group(hted):
-    ''' Set something.'''
-    log.info("called cli.set_group")
+def get_help(ctx, hted, cmd=None):
+    ''' Show help message for command. '''
+    if cmd is not None:
+        print_help(ctx.parent.command.get_command(ctx, cmd))
+    else:
+        print_help(ctx.parent.command)
 
 
-set_group.add_command(set_fx)
-
-# ht_cli add -----------------------------
-
-
-@cli.group(
-    name='add',
-    aliases=['a', 'ad'],
-    show_subcommand_aliases=True,
-    no_args_is_help=True,
-)
-@pass_hted
-@log_debug
-def add_group(hted):
-    ''' Add something. '''
-    log.info("called cli.add_group")
+cli.add_command(get_help)
+fx_group.add_command(get_help)
 
 
-add_group.add_command(add_fx)
-
-# ht_cli show ----------------------------
-
-
-@cli.group(
-    'show',
-    aliases=['sh'],
-    show_subcommand_aliases=True,
-    no_args_is_help=True,
-)
-@pass_hted
-@log_debug
-def show_group(hted):
-    ''' Show something.'''
-    log.info("called cli.show_group")
+def print_help(command):
+    ctx = click.get_current_context()
+    click.echo(command.get_help(ctx))
 
 
-show_group.add_command(show_fx)
-
-# ht_cli list ----------------------------
-
-
-@cli.group(
-    name='list',
-    aliases=['l', 'ls'],
-    show_subcommand_aliases=True,
-    no_args_is_help=True,
-)
-@pass_hted
-@log_debug
-def list_group(hted):
-    ''' List some things.'''
-    log.info("called cli.list_group")
-
-
-# list_group.add_command(list_fx)
-
-# ht_cli edit ----------------------------
-
-
-@cli.group(
-    name='edit',
-    aliases=['e', 'ed'],
-    show_subcommand_aliases=True,
-    no_args_is_help=True,
-)
-@pass_hted
-@log_debug
-def edit_group(hted):
-    ''' Edit something.'''
-    log.info("called cli.edit_group")
-
-
-edit_group.add_command(edit_fx)
-
-
-# ht_cli get fx --------------------------
 def print_banner():
     fig = Figlet(font='cybermedium')
     title = fig.renderText("Hacktribe")
     line = '_' * 40 + "\n"
     link = "https://github.com/bangcorrupt/hacktribe\n"
+
+    intro = "\n     Welcome to Hacktribe Editor.\n" \
+            "\n  Run 'help' to see available options.\n" \
+            "\n Run 'control' to initialise Hacktribe.\n"
+
     banner = line + title + link + line
 
     click.echo(click.style(
         banner,
         fg="red",
+        bold=True,
+    ))
+
+    click.echo(click.style(
+        intro,
+        fg="green",
         bold=True,
     ))
 

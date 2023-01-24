@@ -13,12 +13,23 @@ from hacktribe_editor import ht_logging
 
 log = logging.getLogger(__name__)
 
+
+def try_prompt(message, **kwargs):
+    try:
+        return click.prompt(message, **kwargs)
+    except:
+        print("\nValue required.\n")
+        return None
+
+
 chan_index_opt = option(
     '-c',
     '--channel',
     'chan_index',
     help="Channel index: [0..16] (16 == MFX)",
+    is_flag=False,
     type=int,
+    flag_value=(-1),
     metavar="INDEX",
 )
 
@@ -26,8 +37,10 @@ ifx_index_opt = option(
     '-i',
     '--ifx',
     'ifx_index',
-    type=int,
     help="IFX preset index: [0..95]",
+    is_flag=False,
+    type=int,
+    flag_value=(-1),
     metavar="INDEX",
 )
 
@@ -35,8 +48,10 @@ mfx_index_opt = option(
     '-m',
     '--mfx',
     'mfx_index',
-    type=int,
     help="MFX preset index: [0..31]",
+    is_flag=False,
+    flag_value=(-1),
+    type=int,
     metavar="INDEX",
 )
 src_file_path_opt = option(
@@ -45,6 +60,8 @@ src_file_path_opt = option(
     'file_path',
     type=cloup.Path(exists=True),
     help="Path to file.",
+    is_flag=False,
+    flag_value='',
     metavar="PATH",
 )
 
@@ -54,6 +71,8 @@ dest_file_path_opt = option(
     'file_path',
     type=cloup.Path(),
     help="Path to file.",
+    is_flag=False,
+    flag_value='',
     metavar="PATH",
 )
 
@@ -126,8 +145,8 @@ edit_fx_options = option_group(
 
 
 @cloup.command(
-    name='fx',
-    aliases=['f', 'ef', 'effect'],
+    name='get',
+    aliases=['g'],
     show_constraints=True,
     no_args_is_help=True,
 )
@@ -135,8 +154,9 @@ edit_fx_options = option_group(
 @dest_file_options
 @format_options
 @pass_hted
+@click.pass_context
 @log_debug
-def get_fx(hted, **params):
+def get_fx(ctx, hted, **params):
     '''
     Get FX preset at index from RAM.
 
@@ -144,40 +164,58 @@ def get_fx(hted, **params):
     log.info('Called get_fx.')
 
     print("\nProcessing...")
-    with spinner():
 
-        if params['chan_index'] is not None:
-            print("\nGet channel", params['chan_index'],
-                  "edit buffer as preset\n")
-            if params['chan_index'] == 16:
-                preset = hted.mfxed.get_current_preset(params['chan_index'])
-            else:
-                preset = hted.ifxed.get_current_preset(params['chan_index'])
+    if params['chan_index'] is not None:
 
-        elif params['ifx_index'] is not None:
+        if params['chan_index'] == (-1):
+            params['chan_index'] = try_prompt("Source channel [0..16]",
+                                              type=int)
+            if params['chan_index'] is None:
+                return
+
+    elif params['ifx_index'] is not None:
+        if params['ifx_index'] == (-1):
+            params['ifx_index'] = try_prompt("Source IFX preset [0..95]",
+                                             type=int)
+            if params['ifx_index'] is None:
+                return
+        with spinner():
             preset = hted.ifxed.get_preset(params['ifx_index'])
 
-        elif params['mfx_index'] is not None:
+    elif params['mfx_index'] is not None:
+        with spinner():
             preset = hted.mfxed.get_preset(params['mfx_index'])
 
-        print("\nWrite preset as", params['file_path'], "\n")
-        log.warning("Preset naming not implemented yet.")
+    if params['file_path'] == '':
+        params['file_path'] = try_prompt("Destination file path")
+        if params['file_path'] is None:
+            return
 
-        # FIX - eww
-        if params['bytes'] is not None or not any(
-                k in params for k in ('hex', 'json', 'yaml')):
-            with open(params['file_path'], 'wb') as f:
-                f.write(preset.bytes)
+    print("\nGet channel", params['chan_index'], "edit buffer as preset\n")
+    with spinner():
+        if params['chan_index'] == 16:
+            preset = hted.mfxed.get_current_preset(params['chan_index'])
         else:
-            if params['yaml']:
-                preset = preset.yaml
-            elif params['json']:
-                preset = preset.json
-            elif params['hex']:
-                preset = preset.hex
+            preset = hted.ifxed.get_current_preset(params['chan_index'])
 
-            with open(params['file_path'], 'w') as f:
-                f.write(preset)
+    print("\nWrite preset as", params['file_path'], "\n")
+    log.warning("Preset naming not implemented yet.")
+
+    # FIX - eww
+    if params['bytes'] is not None or not any(
+            k in params for k in ('hex', 'json', 'yaml')):
+        with open(params['file_path'], 'wb') as f:
+            f.write(preset.bytes)
+    else:
+        if params['yaml']:
+            preset = preset.yaml
+        elif params['json']:
+            preset = preset.json
+        elif params['hex']:
+            preset = preset.hex
+
+        with open(params['file_path'], 'w') as f:
+            f.write(preset)
 
     print("\nDone!")
 
@@ -186,8 +224,8 @@ def get_fx(hted, **params):
 
 
 @cloup.command(
-    name='fx',
-    aliases=['f', 'ef', 'effect'],
+    name='add',
+    aliases=['a'],
     show_constraints=True,
     no_args_is_help=True,
 )
@@ -199,48 +237,52 @@ def add_fx(hted, **params):
     ''' Add new FX preset to RAM. '''
 
     print("\nProcessing...")
-    with spinner():
-        if params['file_path'] is not None:
-            print("\nAdd preset file.\n")
-            with open(params['file_path'], 'rb') as f:
-                fx = f.read()
+    if params['file_path'] is not None:
+        with open(params['file_path'], 'rb') as f:
+            fx = f.read()
 
-            if params['yaml']:
-                preset = HtFXPreset.from_yaml(fx)
-            elif params['json']:
-                preset = HtFXPreset.from_json(fx)
-            elif params['hex']:
-                log.warning("HtFXPreset.from_hex() not implemented yet.")
-                print("\nHtFXPreset.from_hex() not implemented yet.\n")
-                return
-            else:
-                preset = HtFXPreset(fx)
+        if params['yaml']:
+            preset = HtFXPreset.from_yaml(fx)
+        elif params['json']:
+            preset = HtFXPreset.from_json(fx)
+        elif params['hex']:
+            log.warning("HtFXPreset.from_hex() not implemented yet.")
+            print("\nHtFXPreset.from_hex() not implemented yet.\n")
+            return
+        else:
+            preset = HtFXPreset(fx)
 
-            if fxed_utils.preset_is_mfx(
-                    preset.container):  # test if ifx or mfx
-                log.warning("Add MFX preset not implemented yet.")
-                print("\nAdd MFX preset not implemented yet.\n")
-                return
+        if fxed_utils.preset_is_mfx(preset.container):  # test if ifx or mfx
+            log.warning("Add MFX preset not implemented yet.")
+            print("\nAdd MFX preset not implemented yet.\n")
+            return
+        else:
+            log.info("Add file as new IFX preset.")
+            print("\nAdd file as new IFX preset.\n")
+        with spinner():
+            hted.ifxed.add_preset(preset)
 
-        elif params['chan_index'] is not None:
-            log.info("Add channel edit buffer.")
-            print("\nAdd channel edit buffer\n")
+    elif params['chan_index'] is not None:
 
-            if params['chan_index'] == 16:
-                mfx = True
-                log.warning("Add MFX preset not implemented yet.")
-                print("\nAdd MFX preset not implemented yet.\n")
-                return
+        if params['chan_index'] == 16:
+            mfx = True
+            log.warning("Add MFX preset not implemented yet.")
+            print("\nAdd MFX preset not implemented yet.\n")
+            return
+        else:
             preset = hted.ifxed.get_current_preset(params['chan_index'])
+            log.info("Add channel edit buffer as new IFX preset.")
+            print("\nAdd channel edit buffer as new IFX preset.\n")
+            with spinner():
+                hted.ifxed.add_preset(preset)
 
-        hted.ifxed.add_preset(preset)
     print("\nDone!")
 
 
 # ht_cli set fx --------------------------
 @cloup.command(
-    name='fx',
-    aliases=['f', 'ef', 'effect'],
+    name='set',
+    aliases=['s'],
     no_args_is_help=True,
 )
 @set_fx_src_options
@@ -287,8 +329,8 @@ def set_fx(hted, **params):
 
 
 @cloup.command(
-    name='fx',
-    aliases=['f', 'ef', 'effect'],
+    name='show',
+    aliases=['v', 'sh'],
     no_args_is_help=True,
 )
 @edit_fx_options
@@ -342,8 +384,8 @@ def show_fx(hted, **params):
 
 
 @cloup.command(
-    name='fx',
-    aliases=['f', 'ef', 'effect'],
+    name='edit',
+    aliases=['e'],
     no_args_is_help=True,
 )
 @edit_fx_options
