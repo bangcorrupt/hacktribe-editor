@@ -124,7 +124,7 @@ See MIDI.md for more information on MIDI mapping.
 
 <br/>
 
-Run `control` to initalise MIDI communication with Hacktribe.
+Run `control` to initialise MIDI communication with Hacktribe.
 
 The log output should include the line:
 

@@ -1,7 +1,7 @@
 
 `ht-cli` should create a virtual MIDI input port as a control input.
 
-Any input ports added to the `control: input` section of the config file will also be opened as control inputs.
+Any input ports added to the `control: input:` section of the config file will also be opened as control inputs.
 
 Values in `hacktribe_editor/midi_map.py` may need adjusting to suit your controller.
 
