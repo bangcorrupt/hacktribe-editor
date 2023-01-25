@@ -9,7 +9,8 @@ Early support for FX editing.
 ### Testing
 
 Clone the repo and enter directory:
-    
+
+
     git clone --recursive -b ht-cli https://bangcorrupt/hacktribe-editor
     cd hacktribe-editor
 
@@ -48,19 +49,17 @@ You should see:
       Run 'help' to see available options.
 
      Run 'control' to initialise Hacktribe.
+     
+    [ ht ] 
 
 
 <br/>
 
 
-Run `help` to show some help:
-
-    help
+At the `[ ht ]` prompt, run `help` to show some help.  You should see something like:
 
 
-You should see something like:
-
-
+    [ ht ] help
     Usage: ht-cli  help [OPTIONS] COMMAND [ARGS]...
 
       Command line interface for Hacktribe Editor.
