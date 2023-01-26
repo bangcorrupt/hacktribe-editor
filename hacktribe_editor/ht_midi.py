@@ -136,8 +136,9 @@ class HtMIDI:
             sys.exit(0)
 
         for port in control_port:
-            self.control_ports.append(port)
-            self.log.info("Added control_port: %s", port.name)
+            if port ins not None:
+                self.control_ports.append(port)
+                self.log.info("Added control_port: %s", port.name)
 
     # clock log spam
     # @log_debug
