@@ -172,7 +172,14 @@ def get_fx(ctx, hted, **params):
                                               type=int)
             if params['chan_index'] is None:
                 return
-
+            
+        print("\nGet channel", params['chan_index'], "edit buffer as preset\n")
+        with spinner():
+            if params['chan_index'] == 16:
+                preset = hted.mfxed.get_current_preset(params['chan_index'])
+            else:
+                preset = hted.ifxed.get_current_preset(params['chan_index'])         
+            
     elif params['ifx_index'] is not None:
         if params['ifx_index'] == (-1):
             params['ifx_index'] = try_prompt("Source IFX preset [0..95]",
@@ -190,14 +197,7 @@ def get_fx(ctx, hted, **params):
         params['file_path'] = try_prompt("Destination file path")
         if params['file_path'] is None:
             return
-
-    print("\nGet channel", params['chan_index'], "edit buffer as preset\n")
-    with spinner():
-        if params['chan_index'] == 16:
-            preset = hted.mfxed.get_current_preset(params['chan_index'])
-        else:
-            preset = hted.ifxed.get_current_preset(params['chan_index'])
-
+    
     print("\nWrite preset as", params['file_path'], "\n")
     log.warning("Preset naming not implemented yet.")
 
