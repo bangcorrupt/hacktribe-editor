@@ -136,7 +136,7 @@ class HtMIDI:
             sys.exit(0)
 
         for port in control_port:
-            if port ins not None:
+            if port is not None:
                 self.control_ports.append(port)
                 self.log.info("Added control_port: %s", port.name)
 
