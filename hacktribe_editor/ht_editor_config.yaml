@@ -8,4 +8,4 @@ midi:
     - null
     map: ./midi_map.py
 log:
-  level: info
+  level: error
