@@ -5,7 +5,7 @@ midi:
   output: electribe2 sampler:electribe2 sampler electribe2 s
   control:
     input:
-      -
+    - null
     map: ./midi_map.py
 log:
-  level: error
+  level: info

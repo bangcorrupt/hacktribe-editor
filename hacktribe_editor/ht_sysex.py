@@ -363,8 +363,8 @@ def get_fx_edit_buffer(index=None, global_channel=0x30, product_id=0x124):
     Return Read CPU RAM Request SysEx messages as bytes
 
         - Get FX edit buffer for part
-        - index is part 0..16 | 'mfx'
-            - 'mfx' == 16
+        - index is fx slot 0..0x20 | 'mfx'
+            - 'mfx' == 0x20
     '''
     log.info('Called get_fx_edit_buffer.')
 

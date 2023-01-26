@@ -51,6 +51,7 @@ class HtIFXEditor(HtEdit):
     def buffer(self, buffer):
         """ Set buffer """
 
+        self.log.info("Set buffer")
         self._buffer = buffer
 
     @property
@@ -64,7 +65,7 @@ class HtIFXEditor(HtEdit):
             len(list(self.buffer[index].param)) for index in range(2)
         ]
 
-        self.log.info("Maximum IFX param: %s.", sum(max_fx_param))
+        self.log.info("Maximum IFX param: %s.", sum(max_fx_param) - 1)
 
         return max_fx_param
 
@@ -137,11 +138,13 @@ class HtIFXEditor(HtEdit):
 
         self.log.info('Called set_fx_param.')
 
-        if param_index > self.max_fx_param[0]:
+        if param_index >= self.max_fx_param[0]:
             param_index -= self.max_fx_param[0]
             fx_slot = 1
+            self.log.info("FX slot 1")
         else:
             fx_slot = 0
+            self.log.info("FX slot 0")
 
         if param_index < self.max_fx_param[fx_slot]:
             self.log.info(
@@ -162,11 +165,11 @@ class HtIFXEditor(HtEdit):
         else:
             self.log.warning(
                 "Parameter index out of range, maximum parameter index is %s.",
-                self.max_fx_param[fx_slot])
+                sum(self.max_fx_param) - 1)
 
             print(
                 "Parameter index out of range, maximum parameter index is %d."
-                % (self.max_fx_param[fx_slot]))
+                % (sum(self.max_fx_param) - 1))
 
     @log_debug
     def set_map_param(self, channel, map_slot, param_index, value):
@@ -269,7 +272,11 @@ class HtIFXEditor(HtEdit):
 
         self.log.info("Called get_current_preset.")
 
-        self.refresh_edit_buffer(channel)
+        # Current hack does not update device edit buffer,
+        # only sends values to DSP.
+        #
+        # self.refresh_edit_buffer(channel)
+
         fxp = fxed_utils.fx_ram_to_preset(self.buffer, as_bytes=True)
 
         return HtFXPreset(fxp)

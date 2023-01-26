@@ -48,6 +48,7 @@ class HtFormat:
             data = self.fmt.build({})
 
         container = self.fmt.parse(data)
+
         dic = container_to_dict(container)
         self.__dict__.update(dic)
 

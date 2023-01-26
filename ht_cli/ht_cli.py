@@ -116,7 +116,7 @@ def cli(ctx, hted=None, log_level=None):
                     ctx,
                     prompt_kwargs=prompt_kwargs,
                 )
-            except:
+            except Exception:
                 log.error("Exception.")
 
             leave = click.confirm('Exit ht-cli?', default=True)

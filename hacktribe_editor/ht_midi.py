@@ -8,6 +8,7 @@ from time import sleep
 
 from hacktribe_editor import ht_logging
 from hacktribe_editor import ht_sysex_utils as sysx_utils
+from hacktribe_editor.ht_exceptions import InputPortError, OutputPortError
 
 
 @log_debug
@@ -70,17 +71,14 @@ class HtMIDI:
             self.inport = mido.open_input(inport) if isinstance(
                 inport, str) else inport
             self.log.info('Input port: %s', self.inport.name)
-        except:
-            self.log.error("Error: inport is required")
-            sys.exit(0)
-
+        except InputPortError(inport):
+            self.log.error("Error: failed to open input port: %s.", inport)
         try:
             self.outport = mido.open_output(outport) if isinstance(
                 outport, str) else outport
             self.log.info('Output port: %s', self.outport.name)
-        except:
-            self.log.error("Error: outport is required")
-            sys.exit(0)
+        except OutputPortError(outport):
+            self.log.error("Error: failed to open output port: %s.", outport)
 
         self.inport.callback = self.input_callback
 
@@ -98,7 +96,7 @@ class HtMIDI:
         for port in self.control_ports:
             try:
                 port.callback = self.control_callback
-            except:
+            except InputPortError(port.name):
                 self.log.error(
                     "Error: Failed to add control_callback: port=%s.",
                     port.name)
@@ -130,7 +128,7 @@ class HtMIDI:
                 mido.open_input(port) if isinstance(port, str) else port
                 for port in control_port
             ]
-            self.log.info("Added control port.")
+
         except:
             self.log.error("Error: mido could not open control_port")
             sys.exit(0)
