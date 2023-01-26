@@ -181,6 +181,8 @@ You should see the Autopan MFX has been replaced with a new plate reverb.
 
 Read through the help in the cli and try stuff out.  Have a look in `ht_data/fx` for some presets.
 
+See [FX Preset Editing](https://github.com/bangcorrupt/hacktribe-editor/wiki/FX-Preset-Editing) for a walkthrough editing a delay IFX.
+
 This tool only acts on the CPU RAM, so if everything goes wrong reboot Hacktribe.
 
 More documentation coming soon.
