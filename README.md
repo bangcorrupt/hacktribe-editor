@@ -118,7 +118,7 @@ Configure a MIDI control input (optional):
 
 You should get a prompt with a list of available MIDI ports, choose one that isn't Hacktribe.
 
-See MIDI.md for more information on MIDI mapping.  
+See [MIDI Control](https://github.com/bangcorrupt/hacktribe-editor/wiki/MIDI-Control) for more information on MIDI mapping.  
 
 
 <br/>
