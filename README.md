@@ -35,6 +35,4 @@ Installation of bsdiff4 will fail on Windows without the correct build tools ins
 
 An [executable](https://github.com/bangcorrupt/hacktribe-editor/blob/main/hacktribe-gui.exe) is available for Windows.
 
-See [this comment](https://github.com/bangcorrupt/hacktribe/discussions/41#discussioncomment-4700681) for why it doesn't work and how to fix it.
-
 
