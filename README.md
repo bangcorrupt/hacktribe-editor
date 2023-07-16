@@ -22,6 +22,11 @@ Install dependencies:
 
     pip install -r requirements.txt
 
+<br/>
+
+Copy factory firmware to `hacktribe-editor/hacktribe/SYSTEM.VSB`.
+
+<br/>
 
 Run `hacktribe_app_gui.py`:
 
