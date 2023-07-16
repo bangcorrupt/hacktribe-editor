@@ -24,7 +24,7 @@ Install dependencies:
 
 <br/>
 
-Copy factory firmware to `hacktribe-editor/hacktribe/SYSTEM.VSB`.
+Copy electribe 2 sampler factory firmware version 2.02 to `hacktribe-editor/hacktribe/SYSTEM.VSB`.
 
 <br/>
 
