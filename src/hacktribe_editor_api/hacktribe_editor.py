@@ -1,1 +1,0 @@
-print("Hacktribe Editor API")
