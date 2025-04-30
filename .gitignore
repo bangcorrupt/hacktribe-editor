@@ -1,6 +1,8 @@
 __pycache__
 dist/
 .venv/
+todo.*
+TODO.*
 *.VSB
 *.e2pat
 *.e2spat
