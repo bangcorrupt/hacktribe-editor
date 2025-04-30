@@ -1,4 +1,4 @@
-from hacktribe_editor_api.ht_logging import log_debug
+from hacktribe_editor.ht_logging import log_debug
 
 # Encode/decode bytes to/from SysEx for Electribe 2
 """

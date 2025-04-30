@@ -1,9 +1,9 @@
-from hacktribe_editor_api.ht_logging import log_debug
+from hacktribe_editor.ht_logging import log_debug
 
-import hacktribe_editor_api.ht_sysex_format as sysx_fmt
+import hacktribe_editor.ht_sysex_format as sysx_fmt
 
-from hacktribe_editor_api.ht_fmt_utils import build_dict, parse_bytes, init_struct
-from hacktribe_editor_api.ht_syx_codec import syx_enc, syx_dec
+from hacktribe_editor.ht_fmt_utils import build_dict, parse_bytes, init_struct
+from hacktribe_editor.ht_syx_codec import syx_enc, syx_dec
 
 """
 Utility functions for ht_sysex and ht_sysex_format

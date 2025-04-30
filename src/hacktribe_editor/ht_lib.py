@@ -1,9 +1,9 @@
 import logging
 
-from hacktribe_editor_api.ht_logging import log_debug
+from hacktribe_editor.ht_logging import log_debug
 
-from hacktribe_editor_api import ht_sysex
-from hacktribe_editor_api import ht_nrpn
+from hacktribe_editor import ht_sysex
+from hacktribe_editor import ht_nrpn
 
 
 class HtFxMidi:

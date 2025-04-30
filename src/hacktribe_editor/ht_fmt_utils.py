@@ -4,7 +4,7 @@ import construct
 from pathlib import Path
 from types import SimpleNamespace
 
-from hacktribe_editor_api.ht_logging import log_debug
+from hacktribe_editor.ht_logging import log_debug
 
 
 @log_debug

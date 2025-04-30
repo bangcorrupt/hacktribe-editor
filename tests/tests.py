@@ -1,6 +1,6 @@
 import logging
 
-from hacktribe_editor_api.ht_lib import HtLib
+from hacktribe_editor.ht_lib import HtLib
 
 ht = HtLib()
 

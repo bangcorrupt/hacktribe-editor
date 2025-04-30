@@ -8,7 +8,7 @@ from construct import (
     Nibble,
     this,
 )
-from hacktribe_editor_api.ht_fx_ram_format import source_control, target_param
+from hacktribe_editor.ht_fx_ram_format import source_control, target_param
 
 midi_status = Bitwise(
     Struct(
