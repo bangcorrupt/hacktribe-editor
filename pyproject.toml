@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "hacktribe-editor-api"
+name = "hacktribe-editor"
 version = "0.0.1"
 authors = [
   { name="bangcorrupt", email="bangcorrupt@gmail.com" },
