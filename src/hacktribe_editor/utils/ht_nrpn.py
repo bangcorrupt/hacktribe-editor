@@ -2,7 +2,7 @@ import logging
 
 from hacktribe_editor.ht_logging import log_debug
 
-import hacktribe_editor.ht_nrpn_format as nrpn_fmt
+import hacktribe_editor.utils.ht_nrpn_format as nrpn_fmt
 
 """
 Build and parses NRPN messages

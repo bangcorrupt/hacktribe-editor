@@ -1,6 +1,6 @@
 from hacktribe_editor.ht_logging import log_debug
 
-from hacktribe_editor.ht_fmt_utils import (
+from hacktribe_editor.utils.ht_fmt_utils import (
     init_struct,
     refresh_struct,
     get_key_index,
@@ -8,7 +8,7 @@ from hacktribe_editor.ht_fmt_utils import (
     build_dict,
     parse_bytes,
 )
-import hacktribe_editor.ht_fx_preset_format as fxp_fmt
+import hacktribe_editor.utils.ht_fx_preset_format as fxp_fmt
 
 # import ht_fx_ram_format as fxr_fmt
 

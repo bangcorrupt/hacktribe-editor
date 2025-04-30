@@ -3,7 +3,7 @@ import logging
 from hacktribe_editor.ht_logging import log_debug
 
 
-from hacktribe_editor.ht_sysex_utils import (
+from hacktribe_editor.utils.ht_sysex_utils import (
     init_sysex,
     build_sysex,
     int_to_midi,
@@ -11,9 +11,9 @@ from hacktribe_editor.ht_sysex_utils import (
     syx_addr_len,
     # get_ram_data,
 )
-from hacktribe_editor.ht_syx_codec import syx_enc  # , syx_dec
+from hacktribe_editor.utils.ht_syx_codec import syx_enc  # , syx_dec
 
-import hacktribe_editor.ht_sysex_format as sysex_fmt
+import hacktribe_editor.utils.ht_sysex_format as sysex_fmt
 
 """
 Hacktribe MIDI System Exclusive messages.

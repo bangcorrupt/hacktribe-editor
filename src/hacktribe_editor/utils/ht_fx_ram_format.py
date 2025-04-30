@@ -11,7 +11,7 @@ from construct import (
     this,
 )
 
-from hacktribe_editor.ht_fx_preset_format import *
+from hacktribe_editor.utils.ht_fx_preset_format import *
 
 # import ht_fx_preset_format
 
