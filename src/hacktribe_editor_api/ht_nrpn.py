@@ -94,7 +94,7 @@ def map_fx_param(
     nrpn_dict.dlsb.value = max_value
     byts += build(nrpn_dict)
 
-    return byts
+    return bytes(byts)
 
 
 @log_debug

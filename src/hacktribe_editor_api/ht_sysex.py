@@ -13,15 +13,29 @@ from hacktribe_editor_api.ht_sysex_utils import (
 )
 from hacktribe_editor_api.ht_syx_codec import syx_enc  # , syx_dec
 
+import hacktribe_editor_api.ht_sysex_format as sysex_fmt
+
 """
 Hacktribe MIDI System Exclusive messages.
 
-        - Member functions return SysEx messages as bytes.
-        - global_channel_channel is global_channel MIDI channel of  device.
+        - Functions return SysEx messages as bytes.
+        - global_channel is global MIDI channel of  device.
         - device is 'hacktribe' | 'sampler' | 'synth'
 """
 
 log = logging.getLogger(__name__)
+
+
+@log_debug
+def parse(byts):
+    """Parse sysex dict to bytes"""
+    return sysex_fmt.sysex.parse(byts)
+
+
+@log_debug
+def build(dic):
+    """Build sysex bytes from dict"""
+    return sysex_fmt.sysex.build(dic)
 
 
 @log_debug

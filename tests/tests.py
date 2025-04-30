@@ -1,8 +1,7 @@
-from hacktribe_editor_api import ht_nrpn as nrpn
+import logging
 
+from hacktribe_editor_api.ht_lib import HtLib
 
-msg = nrpn.set_fx_param(0, 1)
+ht = HtLib()
 
-print(msg)
-
-print("Test complete.")
+logging.info("Test complete.")
