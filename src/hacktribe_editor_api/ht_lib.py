@@ -66,7 +66,7 @@ class HtFxMidi:
 
     @log_debug
     def edit_map(self, map_slot, map_param, param_value, part=0, slot=0):
-        ht_nrpn.edit_fx_map(map_slot, map_param, param_value, part, slot)
+        return ht_nrpn.edit_fx_map(map_slot, map_param, param_value, part, slot)
 
 
 class HtMidi:
