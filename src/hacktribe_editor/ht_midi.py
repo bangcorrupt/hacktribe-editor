@@ -39,3 +39,7 @@ class HtMidi:
         """
 
         return ht_sysex.parse(sysex_bytes)
+
+
+if __name__ == "__main__":
+    ht = HtMidi()
