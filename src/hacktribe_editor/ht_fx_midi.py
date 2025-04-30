@@ -12,7 +12,7 @@ class HtFxMidi:
         pass
 
     @log_debug
-    def get_ifx(index, global_channel=0x30, product_id=0x124):
+    def get_ifx(self, index, global_channel=0x30, product_id=0x124):
         """
         Returns SysEx message to request IFX preset.
 
@@ -25,7 +25,7 @@ class HtFxMidi:
         return ht_sysex.get_ifx(index, global_channel, product_id)
 
     @log_debug
-    def set_ifx(index, ifx, global_channel=0x30, product_id=0x124):
+    def set_ifx(self, index, ifx, global_channel=0x30, product_id=0x124):
         """
         Returns SysEx message to set IFX preset.
 
@@ -39,23 +39,23 @@ class HtFxMidi:
         return ht_sysex.set_ifx(index, ifx, global_channel, product_id)
 
     @log_debug
-    def add_ifx(ifx, max_ifx_index, global_channel=0x30, product_id=0x124):
+    def add_ifx(self, ifx, max_ifx_index, global_channel=0x30, product_id=0x124):
         return ht_sysex.add_ifx(ifx, max_ifx_index, global_channel, product_id)
 
     @log_debug
-    def get_max_ifx_index():
+    def get_max_ifx_index(self):
         return ht_sysex.get_max_ifx_index()
 
     @log_debug
-    def set_mfx(index, mfx, global_channel=0x30, product_id=0x124):
+    def set_mfx(self, index, mfx, global_channel=0x30, product_id=0x124):
         return ht_sysex.set_mfx(index, mfx, global_channel, product_id)
 
     @log_debug
-    def get_mfx(index, global_channel=0x30, product_id=0x124):
+    def get_mfx(self, index, global_channel=0x30, product_id=0x124):
         return ht_sysex.get_mfx(index, global_channel, product_id)
 
     @log_debug
-    def get_edit_buffer(index=None, global_channel=0x30, product_id=0x124):
+    def get_edit_buffer(self, index=None, global_channel=0x30, product_id=0x124):
         return ht_sysex.get_fx_edit_buffer(index, global_channel, product_id)
 
     @log_debug
