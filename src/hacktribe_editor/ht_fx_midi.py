@@ -163,3 +163,7 @@ class HtFxMidi:
         :return:                NRPN message as bytes.
         """
         return ht_nrpn.edit_fx_map(map_slot, map_param, param_value, part, slot)
+
+
+if __name__ == "__main__":
+    ht = HtFxMidi()
