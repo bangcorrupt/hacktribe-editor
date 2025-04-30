@@ -1,3 +1,4 @@
+from typing import Sequence
 from construct import (
     Struct,
     Enum,
@@ -36,6 +37,8 @@ nmsb = Struct(
             panel_control=0,
             set_fx_param=1,
             map_fx_param=2,
+            global_param=3,
+            sequence_param=9,
         ),
         0,
     ),
@@ -61,6 +64,12 @@ pad_mode = Default(
 # ADD - Compute device name from fx_format
 fx_slot = Default(Int8ul, 0)
 
+param_index = Default(Int8ul, 0)
+param_index_msb = Default(Int8ul, 0)
+param_index_lsb = Default(Int8ul, 0)
+
+step_index = Default(Int8ul, 0)
+
 nlsb = Struct(
     "status" / midi_status,
     "cc" / Default(Int8ul, 0x62),
@@ -71,6 +80,8 @@ nlsb = Struct(
             "panel_control": pad_mode,
             "set_fx_param": fx_slot,
             "map_fx_param": fx_slot,
+            "global_param": param_index_msb,
+            "sequence_param": step_index,
         },
         default=pad_mode,
     ),
@@ -104,17 +115,27 @@ dmsb = Struct(
             "panel_control": control,
             "set_fx_param": fx_param,
             "map_fx_param": fx_map_param,
+            "global_param": param_index_lsb,
+            "sequence_param": param_index,
         },
         default=control,
     ),
 )
 
+# TODO: Support DATA-INC, DATA-DEC.
+#
 control_value = Default(Int8ul, 0)
 
+# TODO: Enum valid values for each paramter.
+#
 fx_param_value = Default(Int8ul, 0)
+param_value = Default(Int8ul, 0)
 
 min_value = Default(Int8ul, 0)
 max_value = Default(Int8ul, 0)
+
+# TODO: Clamp valid range.
+#
 map_slot = Default(Int8ul, 0)
 
 fx_map_value = Switch(
@@ -139,6 +160,8 @@ dlsb = Struct(
             "panel_control": control_value,
             "set_fx_param": fx_param_value,
             "map_fx_param": fx_map_value,
+            "global_param": param_value,
+            "sequence_param": param_value,
         },
         default=control_value,
     ),
