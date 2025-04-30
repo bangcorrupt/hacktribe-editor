@@ -18,6 +18,7 @@ classifiers = [
 ]
 dependencies = [
     "construct",
+    "pyyaml",
 ]
 keywords = [
     "hacktribe",
