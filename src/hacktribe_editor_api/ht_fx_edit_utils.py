@@ -1,6 +1,6 @@
-from ht_logging import log_debug
+from hacktribe_editor_api.ht_logging import log_debug
 
-from ht_fmt_utils import (
+from hacktribe_editor_api.ht_fmt_utils import (
     init_struct,
     refresh_struct,
     get_key_index,
@@ -8,7 +8,7 @@ from ht_fmt_utils import (
     build_dict,
     parse_bytes,
 )
-import ht_fx_preset_format as fxp_fmt
+import hacktribe_editor_api.ht_fx_preset_format as fxp_fmt
 
 # import ht_fx_ram_format as fxr_fmt
 
@@ -27,14 +27,14 @@ def build_fx_preset(fxp_dict):
 def init_fx_preset(device=None, params=None, mfx=False):
     fxp = init_struct(fxp_fmt.preset)
     if device is not None:
-        if type(device) == str:
+        if type(device) is str:
             if mfx:
                 fxp.struct.mfx_device = device
                 fxp = refresh_fx_preset(fxp)
             else:
                 fxp.struct.ifx_1_device = device
                 fxp = refresh_fx_preset(fxp)
-        elif type(device) == list or type(device) == tuple:
+        elif type(device) is list or type(device) is tuple:
             fxp.struct.ifx_1_device = device[0]
             fxp.struct.ifx_2_device = device[1]
             fxp = refresh_fx_preset(fxp)

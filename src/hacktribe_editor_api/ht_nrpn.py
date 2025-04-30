@@ -1,8 +1,8 @@
 import logging
 
-from ht_logging import log_debug
+from hacktribe_editor_api.ht_logging import log_debug
 
-import ht_nrpn_format as nrpn_fmt
+import hacktribe_editor_api.ht_nrpn_format as nrpn_fmt
 
 """
 Build and parses NRPN messages
@@ -44,8 +44,10 @@ def get_fx_slot(part, slot):
 
 @log_debug
 def set_fx_param(param_index, value, part=0, slot=0):
+    """Return NRPN message to set parameter in FX preset."""
 
     log.info("Called set_fx_param")
+
     fx_slot = get_fx_slot(part, slot)
 
     nrpn_dict = default_dict()
@@ -60,7 +62,6 @@ def set_fx_param(param_index, value, part=0, slot=0):
 def map_fx_param(
     map_slot, source_control, target_param, min_value, max_value, part=0, slot=0
 ):
-
     fx_slot = get_fx_slot(part, slot)
 
     byts = []
@@ -98,7 +99,6 @@ def map_fx_param(
 
 @log_debug
 def edit_fx_map(map_slot, map_param, param_value, part=0, slot=0):
-
     log.info("Called edit_fx_map.")
 
     byts = []

@@ -1,9 +1,9 @@
-from ht_logging import log_debug
+from hacktribe_editor_api.ht_logging import log_debug
 
-import ht_sysex_format as sysx_fmt
+import hacktribe_editor_api.ht_sysex_format as sysx_fmt
 
-from ht_fmt_utils import build_dict, parse_bytes, init_struct
-from ht_syx_codec import syx_enc, syx_dec
+from hacktribe_editor_api.ht_fmt_utils import build_dict, parse_bytes, init_struct
+from hacktribe_editor_api.ht_syx_codec import syx_enc, syx_dec
 
 """
 Utility functions for ht_sysex and ht_sysex_format
@@ -54,7 +54,6 @@ def syx_addr_len(address, length):
 
 @log_debug
 def get_ram_data(sysx_bytes):
-
     sysx = parse_sysex(sysx_bytes)
     data = syx_dec(sysx.body.data[2:])
     return data

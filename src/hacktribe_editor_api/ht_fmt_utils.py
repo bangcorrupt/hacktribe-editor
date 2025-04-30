@@ -2,8 +2,9 @@ import json
 import yaml
 import construct
 from pathlib import Path
+from types import SimpleNamespace
 
-from ht_logging import log_debug
+from hacktribe_editor_api.ht_logging import log_debug
 
 
 @log_debug
@@ -96,22 +97,21 @@ def dict_to_container(fmt, dic):
 
 @log_debug
 def container_to_dict(cont):
-
     dic = {}
     for e in cont:
-        if isinstance(cont[e], construct.core.EnumIntegerString):
+        if isinstance(cont[e], construct.EnumIntegerString):
             dic[e] = str(cont[e])
 
-        elif isinstance(cont[e], construct.core.EnumInteger):
+        elif isinstance(cont[e], construct.EnumInteger):
             dic[e] = int(cont[e])
 
-        elif isinstance(cont[e], construct.core.Container):
+        elif isinstance(cont[e], construct.Container):
             dic[e] = container_to_dict(cont[e])
 
-        elif isinstance(cont[e], construct.core.ListContainer):
+        elif isinstance(cont[e], construct.ListContainer):
             dic[e] = [container_to_dict(i) for i in cont[e]]
 
-        elif isinstance(cont[e], construct.lib.containers.ListContainer):
+        elif isinstance(cont[e], construct.lib.ListContainer):
             dic[e] = [container_to_dict(i) for i in cont[e]]
 
         elif isinstance(cont[e], str):

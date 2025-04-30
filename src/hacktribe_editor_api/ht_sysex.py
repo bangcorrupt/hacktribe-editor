@@ -1,9 +1,9 @@
 import logging
 
-from ht_logging import log_debug
+from hacktribe_editor_api.ht_logging import log_debug
 
 
-from ht_sysex_utils import (
+from hacktribe_editor_api.ht_sysex_utils import (
     init_sysex,
     build_sysex,
     int_to_midi,
@@ -11,7 +11,7 @@ from ht_sysex_utils import (
     syx_addr_len,
     # get_ram_data,
 )
-from ht_syx_codec import syx_enc  # , syx_dec
+from hacktribe_editor_api.ht_syx_codec import syx_enc  # , syx_dec
 
 """
 Hacktribe MIDI System Exclusive messages.
@@ -54,7 +54,8 @@ def set_pattern(index, pattern, global_channel=0x30, product_id=0x124):
     """
     log.info("Called set_pattern")
     sysx = init_sysex("pattern_dump", global_channel, product_id)
-    sysx.body.index = int_to_midi(index)
+    sysx.body.index_lsb = int_to_midi(index)[0]
+    sysx.body.index_msb = int_to_midi(index)[1]
     sysx.body.data = syx_enc(pattern[0x100:])
     return build_sysex(sysx)
 
@@ -420,7 +421,7 @@ def get_groove(index, global_channel=0x30, product_id=0x124):
     # Calculate groove template address
     address = calculate_address(0xC0143B00, 0x140, index)
 
-    return read_cpu_ram(address, length)
+    return read_cpu_ram(address, 0x140)
 
 
 @log_debug

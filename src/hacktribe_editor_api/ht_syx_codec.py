@@ -1,4 +1,4 @@
-from ht_logging import log_debug
+from hacktribe_editor_api.ht_logging import log_debug
 
 # Encode/decode bytes to/from SysEx for Electribe 2
 """
@@ -22,7 +22,6 @@ The dump data conversion
 
 @log_debug
 def syx_enc(byt):
-
     lng = len(byt)
     lst = []
     tmp = []
@@ -30,7 +29,6 @@ def syx_enc(byt):
     cnt = 7
     lim = 0
     for i, e in enumerate(byt):
-
         if lng < 7:
             lim = 7 - lng
 
@@ -57,7 +55,6 @@ def syx_enc(byt):
 
 @log_debug
 def syx_dec(syx):
-
     chk = [syx[i : i + 8] for i in range(0, len(syx), 8)]
 
     lst = []

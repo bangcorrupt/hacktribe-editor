@@ -37,7 +37,6 @@ def set_log_level(level):
 
 
 def log_debug(func):
-
     @wraps(func)
     def debug_log(*args, **kwargs):
         saved_args = locals()
