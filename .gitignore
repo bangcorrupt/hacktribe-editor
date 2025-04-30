@@ -1,5 +1,6 @@
 __pycache__
 dist/
+docs/
 .venv/
 todo.*
 TODO.*
@@ -13,3 +14,5 @@ TODO.*
 *.vim
 *.log
 *.log.*
+.exrc
+*.html
